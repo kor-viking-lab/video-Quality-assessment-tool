@@ -1,0 +1,367 @@
+{
+  "analysis_info": {
+    "primary_file": "video/vika_upscaling_hdr.mp4",
+    "comparison_file": "video/original.mp4",
+    "analysis_timestamp": "2025-09-12T10:40:07.397264",
+    "num_frames_analyzed": 20
+  },
+  "metadata_analysis": {
+    "analysis_tool": "Combined (FFmpeg + MediaInfo)",
+    "file_path": "D:\\Development\\python\\QualityComparison\\video\\vika_upscaling_hdr.mp4",
+    "ffmpeg_data": {
+      "file_info": {
+        "filename": "vika_upscaling_hdr.mp4",
+        "file_size_mb": 90.07,
+        "format": "mov,mp4,m4a,3gp,3g2,mj2",
+        "duration_seconds": 60.07
+      },
+      "video": {
+        "codec_name": "hevc",
+        "codec_long_name": "H.265 / HEVC (High Efficiency Video Coding)",
+        "width": 3840,
+        "height": 2160,
+        "aspect_ratio": null,
+        "pixel_format": "yuv420p10le",
+        "frame_rate": 30.0,
+        "bit_rate": 12376812,
+        "profile": "Main 10",
+        "level": 150
+      },
+      "audio": [
+        {
+          "codec_name": "aac",
+          "codec_long_name": "AAC (Advanced Audio Coding)",
+          "sample_rate": 44100,
+          "channels": 2,
+          "bit_rate": 192471,
+          "language": "und"
+        }
+      ]
+    },
+    "mediainfo_data": {
+      "file_info": {
+        "filename": "vika_upscaling_hdr.mp4",
+        "file_size_mb": 90.07,
+        "format": "MPEG-4",
+        "duration_ms": 60070,
+        "overall_bit_rate": 12577703
+      },
+      "video": {
+        "codec_name": "HEVC",
+        "codec_profile": "Main 10@L5@Main",
+        "width": 3840,
+        "height": 2160,
+        "aspect_ratio": "1.778",
+        "pixel_format": "4:2:0",
+        "frame_rate": 30.0,
+        "frame_count": 1802,
+        "bit_rate": 12376812,
+        "bit_depth": 10,
+        "color_space": "YUV",
+        "color_primaries": "BT.2020",
+        "transfer_characteristics": "HLG",
+        "matrix_coefficients": "BT.2020 non-constant"
+      },
+      "audio": [
+        {
+          "codec_name": "AAC",
+          "codec_profile": null,
+          "sample_rate": 44100,
+          "channels": 2,
+          "channel_layout": "L R",
+          "bit_rate": 192000,
+          "bit_depth": 0,
+          "language": "unknown"
+        }
+      ]
+    },
+    "summary": {
+      "resolution": "3840x2160",
+      "codec": "hevc",
+      "duration_seconds": 60.07,
+      "file_size_mb": 90.07,
+      "frame_rate": 30.0,
+      "bit_rate_kbps": 12376.81,
+      "pixel_format": "yuv420p10le",
+      "color_space": "YUV",
+      "audio_tracks_count": 1
+    },
+    "analysis_timestamp": "2025-09-12T10:40:53.631553"
+  },
+  "quality_comparison": {
+    "reference_video": "video/vika_upscaling_hdr.mp4",
+    "distorted_video": "video/original.mp4",
+    "frames_analyzed": 20,
+    "letterbox_handling": true,
+    "psnr": {
+      "mean_psnr": 16.741750603295657,
+      "min_psnr": 11.918338249302174,
+      "max_psnr": 21.096750479304525,
+      "std_psnr": 2.995555930240966,
+      "frame_psnr_values": [
+        15.20571584063752,
+        20.92208423629939,
+        19.71373288613347,
+        14.89308799801611,
+        14.405508966756802,
+        21.096750479304525,
+        17.29061646805203,
+        20.82014670338012,
+        19.841487972277154,
+        17.825610289243844,
+        18.17174903826937,
+        15.381001288861555,
+        17.238261025380893,
+        12.174737466703574,
+        11.918338249302174,
+        16.94957164931605,
+        18.121989529614908,
+        18.523995258489073,
+        12.334397006761318,
+        12.006229713113187
+      ],
+      "letterbox_removed": true
+    },
+    "ssim": {
+      "mean_ssim": 0.678494341176026,
+      "min_ssim": 0.5278073561878543,
+      "max_ssim": 0.7824940732201415,
+      "std_ssim": 0.06579985160542204,
+      "frame_ssim_values": [
+        0.7188852970937871,
+        0.7405519540076155,
+        0.6980858248034547,
+        0.7203225779069917,
+        0.7309553658113505,
+        0.6658731131334094,
+        0.754766211608326,
+        0.6659957111858628,
+        0.7824940732201415,
+        0.7126593345916744,
+        0.7273808238562476,
+        0.6770813000648663,
+        0.6473029041482093,
+        0.6054743993581327,
+        0.6293614509492503,
+        0.7400794805031436,
+        0.6563552002300161,
+        0.6176591270545113,
+        0.5278073561878543,
+        0.5507953178056737
+      ],
+      "letterbox_removed": true
+    },
+    "vmaf": {
+      "status": "skipped",
+      "reason": "VMAF 기능은 동일한 해상도가 아닙니다.",
+      "resolution_info": {
+        "reference": "3840x2160",
+        "distorted": "640x480"
+      },
+      "note": "VMAF는 동일한 해상도의 비디오만 비교할 수 있습니다."
+    }
+  },
+  "standards_compliance": {
+    "file_path": "video/vika_upscaling_hdr.mp4",
+    "standards_check": {
+      "container": {
+        "file_extension": "mp4",
+        "detected_format": "mpeg-4",
+        "compliance": {
+          "extension": {
+            "status": "pass",
+            "level": "required"
+          },
+          "format": {
+            "status": "warning",
+            "reason": "알 수 없는 포맷: mpeg-4"
+          }
+        }
+      },
+      "codec": {
+        "detected_codecs": {
+          "ffmpeg": "hevc",
+          "mediainfo": "hevc"
+        },
+        "compliance": {
+          "codec": {
+            "status": "pass",
+            "level": "premium",
+            "codec": "hevc"
+          }
+        }
+      },
+      "bitrate": {
+        "detected_bitrates": {
+          "video_mbps": 12.38,
+          "overall_mbps": 12.58
+        },
+        "compliance": {
+          "bitrate": {
+            "status": "pass",
+            "category": "streaming",
+            "range": "10-20 Mbps"
+          }
+        }
+      },
+      "color_system": {
+        "detected_color_info": {
+          "color_space": "yuv",
+          "color_primaries": "bt.2020",
+          "transfer_characteristics": "hlg",
+          "matrix_coefficients": "bt.2020 non-constant"
+        },
+        "compliance": {
+          "color_system": {
+            "status": "warning",
+            "reason": "알 수 없는 색상 시스템: bt.2020"
+          }
+        }
+      },
+      "bit_depth": {
+        "detected_bit_depth": 10,
+        "compliance": {
+          "bit_depth": {
+            "status": "pass",
+            "level": "minimum",
+            "value": 10,
+            "note": "12-bit 권장"
+          }
+        }
+      },
+      "resolution": {
+        "detected_resolution": {
+          "width": 3840,
+          "height": 2160,
+          "aspect_ratio": null
+        },
+        "compliance": {
+          "resolution": {
+            "status": "pass",
+            "standard": "UHD 4K",
+            "resolution": "3840x2160"
+          },
+          "aspect_ratio": {
+            "status": "pass",
+            "ratio": "16:9",
+            "calculated": "1.78:1"
+          }
+        }
+      },
+      "frame_rate": {
+        "detected_frame_rate": 30.0,
+        "compliance": {
+          "frame_rate": {
+            "status": "pass",
+            "category": "broadcast",
+            "value": 30.0
+          }
+        }
+      },
+      "hdr": {
+        "detected_hdr_info": {
+          "transfer_characteristics": "hlg",
+          "color_primaries": "bt.2020"
+        },
+        "compliance": {
+          "hdr": {
+            "status": "pass",
+            "format": "HLG",
+            "note": "HDR 메타데이터 확인 필요"
+          }
+        }
+      }
+    },
+    "compliance_score": {
+      "overall_score": {
+        "percentage": 91.2,
+        "grade": "A+ (우수)",
+        "weighted_score": 15.5,
+        "max_score": 17
+      },
+      "summary": {
+        "total_checks": 8,
+        "passed": 7,
+        "warnings": 1,
+        "failures": 0
+      },
+      "detailed_results": {
+        "container": {
+          "status": "pass",
+          "weight": 1,
+          "details": {
+            "status": "pass",
+            "level": "required"
+          }
+        },
+        "codec": {
+          "status": "pass",
+          "weight": 3,
+          "details": {
+            "status": "pass",
+            "level": "premium",
+            "codec": "hevc"
+          }
+        },
+        "bitrate": {
+          "status": "pass",
+          "weight": 2,
+          "details": {
+            "status": "pass",
+            "category": "streaming",
+            "range": "10-20 Mbps"
+          }
+        },
+        "color_system": {
+          "status": "warning",
+          "weight": 3,
+          "details": {
+            "status": "warning",
+            "reason": "알 수 없는 색상 시스템: bt.2020"
+          }
+        },
+        "bit_depth": {
+          "status": "pass",
+          "weight": 2,
+          "details": {
+            "status": "pass",
+            "level": "minimum",
+            "value": 10,
+            "note": "12-bit 권장"
+          }
+        },
+        "resolution": {
+          "status": "pass",
+          "weight": 3,
+          "details": {
+            "status": "pass",
+            "standard": "UHD 4K",
+            "resolution": "3840x2160"
+          }
+        },
+        "frame_rate": {
+          "status": "pass",
+          "weight": 1,
+          "details": {
+            "status": "pass",
+            "category": "broadcast",
+            "value": 30.0
+          }
+        },
+        "hdr": {
+          "status": "pass",
+          "weight": 2,
+          "details": {
+            "status": "pass",
+            "format": "HLG",
+            "note": "HDR 메타데이터 확인 필요"
+          }
+        }
+      },
+      "recommendations": [
+        "Rec. 2020 (Wide Color Gamut) 사용 권장"
+      ]
+    },
+    "timestamp": "2025-09-12T10:40:53.631553"
+  }
+}
