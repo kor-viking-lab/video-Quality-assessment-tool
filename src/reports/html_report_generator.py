@@ -46,8 +46,12 @@ class HTMLReportGenerator:
         # 데이터 추출
         analysis_info = data.get("analysis_info", {})
         metadata = data.get("metadata_analysis", {})
-        quality_analysis = data.get("quality_analysis") or data.get(
-            "quality_comparison"
+        # 업스케일링, 디노이즈, 색복원 모두 지원
+        quality_analysis = (
+            data.get("quality_analysis")
+            or data.get("quality_comparison")
+            or data.get("denoise_evaluation")
+            or data.get("colorization_evaluation")
         )
         standards_compliance = data.get("standards_compliance", {})
 
@@ -83,7 +87,7 @@ class HTMLReportGenerator:
         {self._generate_summary_section(metadata, quality_analysis, standards_compliance)}
         {self._generate_metadata_section(metadata)}
         {self._generate_quality_section(quality_analysis)}
-        {self._generate_standards_section(standards_compliance)}
+        {self._generate_standards_section(standards_compliance, quality_analysis)}
         {self._generate_charts_section(quality_analysis)}
         {self._generate_footer()}
     </div>
@@ -414,8 +418,9 @@ class HTMLReportGenerator:
             return ""
 
         quality_html = ""
+        evaluation_type = quality.get("evaluation_type", "")
 
-        # PSNR 정보
+        # 공통 메트릭: PSNR, SSIM
         if "psnr" in quality:
             psnr_data = quality["psnr"]
             quality_html += f"""
@@ -425,7 +430,6 @@ class HTMLReportGenerator:
                 </div>
             """
 
-        # SSIM 정보
         if "ssim" in quality:
             ssim_data = quality["ssim"]
             quality_html += f"""
@@ -434,6 +438,94 @@ class HTMLReportGenerator:
                     <span class="value">{ssim_data.get('mean_ssim', 0):.4f}</span>
                 </div>
             """
+
+        # VMAF (업스케일링)
+        if "vmaf" in quality and quality["vmaf"].get("status") == "success":
+            vmaf_data = quality["vmaf"]
+            quality_html += f"""
+                <div class="info-item">
+                    <span class="label">VMAF 평균</span>
+                    <span class="value">{vmaf_data.get('mean_vmaf', 0):.2f}</span>
+                </div>
+            """
+
+        # 디노이즈 특화 메트릭
+        if evaluation_type == "denoising":
+            if "noise_reduction" in quality:
+                nr_data = quality["noise_reduction"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">노이즈 제거율</span>
+                        <span class="value">{nr_data.get('mean_reduction_ratio', 0):.1f}%</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">원본 노이즈 레벨</span>
+                        <span class="value">{nr_data.get('mean_original_noise', 0):.2f}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">디노이즈 후 노이즈 레벨</span>
+                        <span class="value">{nr_data.get('mean_denoised_noise', 0):.2f}</span>
+                    </div>
+                """
+
+            if "detail_preservation" in quality:
+                dp_data = quality["detail_preservation"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">디테일 보존율</span>
+                        <span class="value">{dp_data.get('mean_preservation_ratio', 0):.1f}%</span>
+                    </div>
+                """
+
+            if "blur_amount" in quality:
+                blur_data = quality["blur_amount"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">선명도 점수</span>
+                        <span class="value">{blur_data.get('mean_blur_score', 0):.1f}</span>
+                    </div>
+                """
+
+        # 색복원 특화 메트릭
+        elif evaluation_type == "colorization":
+            if "color_accuracy" in quality:
+                ca_data = quality["color_accuracy"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">색상 정확도 (Delta E)</span>
+                        <span class="value">{ca_data.get('mean_delta_e', 0):.2f}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">밝기 차이 (L)</span>
+                        <span class="value">{ca_data.get('mean_l_diff', 0):.2f}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">색상 채널 차이 (a)</span>
+                        <span class="value">{ca_data.get('mean_a_diff', 0):.2f}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">색상 채널 차이 (b)</span>
+                        <span class="value">{ca_data.get('mean_b_diff', 0):.2f}</span>
+                    </div>
+                """
+
+            if "saturation_metrics" in quality:
+                sat_data = quality["saturation_metrics"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">채도 복원율</span>
+                        <span class="value">{sat_data.get('mean_saturation_ratio', 0):.1f}%</span>
+                    </div>
+                """
+
+            if "hue_difference" in quality:
+                hue_data = quality["hue_difference"]
+                quality_html += f"""
+                    <div class="info-item">
+                        <span class="label">색조 차이</span>
+                        <span class="value">{hue_data.get('mean_hue_diff', 0):.2f}°</span>
+                    </div>
+                """
 
         return f"""
         <div class="section">
@@ -444,10 +536,16 @@ class HTMLReportGenerator:
         </div>
         """
 
-    def _generate_standards_section(self, standards: Dict) -> str:
+    def _generate_standards_section(self, standards: Dict, quality: Dict = None) -> str:
         """표준 준수 섹션 생성"""
         if not standards or "compliance_score" not in standards:
             return ""
+
+        # 디노이즈와 색복원에서는 DCI/OTT 표준 준수도 섹션을 숨김
+        if quality:
+            evaluation_type = quality.get("evaluation_type", "")
+            if evaluation_type in ["denoising", "colorization"]:
+                return ""
 
         score = standards["compliance_score"]["overall_score"]
 
