@@ -1,4 +1,4 @@
-# OTT/DCI 품질평가 도구 v1.0.0
+# OTT/DCI 품질평가 도구 v1.0.1
 
 META(PQL) / NETFLIX(VMAF) 기준 종합 품질 분석 도구
 
