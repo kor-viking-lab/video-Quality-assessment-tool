@@ -148,6 +148,11 @@ conda activate quality_env
 python src/main.py
 ```
 
+### 작동 영상
+
+https://github.com/user-attachments/assets/f7b8cc4e-755c-4cf7-a8b6-99fb7dba94f8
+
+
 ### 메뉴 옵션
 
 프로그램 실행 후 다음 기능을 선택할 수 있습니다:
