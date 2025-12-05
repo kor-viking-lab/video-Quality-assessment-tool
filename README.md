@@ -1,4 +1,4 @@
-# OTT/DCI 품질평가 도구 v1.1.0
+# OTT/DCI 품질평가 도구 v1.1.1
 
 META(PQL) / NETFLIX(VMAF) 기준 종합 품질 분석 도구
 
@@ -266,9 +266,10 @@ pip install --upgrade pymediainfo
 - **scikit-image** - 이미지 품질 메트릭 (PSNR, SSIM)
 - **Chart.js** - HTML 보고서 차트 생성
 
-## 라이선스
+## 라이선스 및 개발사
+이 프로젝트는 MIT License로 배포되며, [Viking Lab](http://www.viking-lab.com/)의 연구개발 목적으로 제작되었습니다.
 
-이 프로젝트는 개발 및 연구 목적으로 제작되었습니다.
+자세한 내용은 [LICENSE](./LICENSE)를 참조하세요.
 
 ## 업데이트 내역
 
@@ -295,6 +296,10 @@ pip install --upgrade pymediainfo
   - 분석 타입별 맞춤형 보고서 생성
   - 디노이즈/색복원 시 DCI/OTT 표준 준수도 섹션 자동 숨김
   - 차트 및 시각화 향상
+
+### v1.1.1 (2025-12-05)
+
+- 라이선스 추가
 
  
 ## 지원
